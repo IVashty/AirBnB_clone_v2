@@ -3,7 +3,7 @@
 now deploy the archive
 """
 from fabric.api import *
-import os.path
+import os
 from fabric.operations import run, put, env
 
 
