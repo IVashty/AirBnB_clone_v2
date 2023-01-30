@@ -11,13 +11,14 @@ import os
 
 def do_pack():
     """
-    archive created must be web_static_<year><month><day><hour><minute><second>.tgz
+    archive created must be
+    web_static_<year><month><day><hour><minute><second>.tgz
     """
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     if isdir("versions") is False:
         local("mkdir -p versions")
-        filename = "web_static_" + date + ".tgz"
-        local("tar -cvzf versions/" + filename + " web_static")
-        return "versions/" + filename
+        file_name = "web_static_" + date + ".tgz"
+        local("tar -cvzf versions/" + file_name + " web_static")
+        return "versions/" + file_name
     else:
         return None
