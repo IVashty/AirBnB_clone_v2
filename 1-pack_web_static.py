@@ -21,5 +21,5 @@ def do_pack():
         filename = "web_static_" + date + ".tgz"
         local("tar -cvzf versions/" + filename + " web_static")
         return "versions/" + filename
-    except:
+    except Except:
         return None
