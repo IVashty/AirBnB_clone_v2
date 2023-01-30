@@ -20,7 +20,9 @@ def do_pack():
             local("mkdir -p versions")
         file_name = "web_static_" + date + ".tgz"
         file_path = "versions/" + file_name
-        local("tar -cvzf versions/" + file_path + " web_static")
+        local("tar -cvzf {} web_static" + file_path)
+        local("test -f {}" + file_path, capture=True).succeeded
+
         return file_path
     except Exception:
         return None
