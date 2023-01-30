@@ -18,11 +18,8 @@ def do_pack():
     try:
         if isdir("versions") is False:
             local("mkdir -p versions")
-        file_name = "web_static_" + date + ".tgz"
-        file_path = "versions/" + file_name
-        local("tar -cvzf {} web_static" + file_path)
-        local("test -f {}" + file_path, capture=True).succeeded
-
-        return file_path
+            file_name = "web_static_{}.tgz".format(data)
+            local("tar -cvzf versions/web_static_" + file_name + " web_static")
+        return "versions/" + file_name
     except Exception:
         return None
