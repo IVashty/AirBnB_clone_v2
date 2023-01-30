@@ -19,7 +19,8 @@ def do_pack():
         if isdir("versions") is False:
             local("mkdir -p versions")
         file_name = "web_static_" + date + ".tgz"
-        local("tar -cvzf versions/" + file_name + " web_static")
-        return "versions/" + file_name
+        file_path = "versions/" + file_name
+        local("tar -cvzf versions/" + file_path + " web_static")
+        return file_path
     except Exception:
         return None
