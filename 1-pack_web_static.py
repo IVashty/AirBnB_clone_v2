@@ -6,7 +6,6 @@ of your AirBnB Clone repo, using the function do_pack.
 """
 from fabric.api import *
 from datetime import datetime
-import os
 
 
 def do_pack():
@@ -15,11 +14,11 @@ def do_pack():
     web_static_<year><month><day><hour><minute><second>.tgz
     """
     date = datetime.now().strftime("%Y%m%d%H%M%S")
-    try:
-        if isdir("versions") is False:
-            local("mkdir -p versions")
-        filename = "web_static_" + date + ".tgz"
-        local("tar -cvzf versions/" + filename + " web_static")
-        return "versions/" + filename
-    except Except:
+    local("mkdir -p versions")
+    file_name = "web_static_" + date + ".tgz"
+    local("tar -cvzf versions/ webstatic" + file_name)
+
+    if local("ls versions/" + file_name, capture=True).succeeded:
+        return "versions/" + file_name
+    else:
         return None
