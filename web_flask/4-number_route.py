@@ -5,40 +5,35 @@ display more text but an integer this time
 from flask import Flask, abort
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
-@app.route("/")
-def hello():
+@app.route("/", strict_slashes=False)
+def index():
     return "Hello HBNB!"
 
 
-@app.route("/hbnb")
+@app.route("/hbnb", strict_slashes=False)
 def hbnb():
     return "HBNB"
 
 
-@app.route("/c/<text>")
+@app.route("/c/<text>", strict_slashes=False)
 def c(text):
     text = text.replace("_", " ")
-    return f"C {text}"
+    return "C " + text
 
 
-@app.route("/python/")
-@app.route("/python/<text>")
+@app.route("/python/<text>", strict_slashes=False)
+@app.route("/python/", strict_slashes=False)
 def python(text="is cool"):
     text = text.replace("_", " ")
-    return f"Python {text}"
+    return "Python " + text
 
 
-@app.route("/number/<int:n>")
+@app.route("/number/<int:n>", strict_slashes=False)
 def number(n):
-    return f"{n} is a number"
-
-
-@app.route("/number/<non_int:n>")
-def not_a_number(n):
-    abort(404)
+    """Displays 'n is a number' only if n is an integer."""
+    return "{} is a number".format(n)
 
 
 if __name__ == "__main__":
