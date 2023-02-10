@@ -9,16 +9,19 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def index():
+    """Hello Wprld from flask"""
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
+    """lets add HBNB to the url as path"""
     return "HBNB"
 
 
 @app.route("/c/<text>", strict_slashes=False)
 def c(text):
+    """Simple variable"""
     text = text.replace("_", " ")
     return "C " + text
 
@@ -26,24 +29,32 @@ def c(text):
 @app.route("/python/<text>", strict_slashes=False)
 @app.route("/python/", strict_slashes=False)
 def python(text="is cool"):
+    """default value"""
     text = text.replace("_", " ")
     return "Python " + text
 
 
-@app.route("/number/<int:n>", strict_slashes=False)
-def number(n):
-    """Displays 'n is a number' only if n is an integer."""
-    return "{} is a number".format(n)
+@app.route("/number/<int:number>", strict_slashes=False)
+def number(number):
+    """Displays 'number is a integer' only if number  is an integer."""
+    return "{} is a number".format(number)
 
 
-@app.route("/number_template/<int:n>", strict_slashes=False)
-def number_template(n):
-    return render_template("5-number.html", n=n)
+@app.route("/number_template/<int:number>", strict_slashes=False)
+def number_template(number):
+    """
+    display a html page with number if the variable number is an integer
+    """
+    return render_template("5-number.html", number=number)
 
 
-@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
-def number_odd_or_even(n):
-    return render_template("6-number_odd_or_even.html", n=n)
+@app.route("/number_odd_or_even/<int:number>")
+def number_odd_or_even(number):
+    return render_template(
+        "6-number_odd_or_even.html",
+        number=number,
+        odd_or_even="even" if number % 2 == 0 else "odd",
+    )
 
 
 if __name__ == "__main__":
